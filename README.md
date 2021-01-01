@@ -11,5 +11,5 @@ Solutions for programming problems at https://onlinejudge.org/.
 ## Running a solution
 
 ```bash
-(cd <problem_number> && clang++ solution.cpp && ./a.exe < sample-input.txt
+(cd <problem_number> && clang++ solution.cpp && ./a.exe < sample-input.txt)
 ```
