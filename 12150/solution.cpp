@@ -22,7 +22,8 @@ int main(int argc, char **argv)
             std::cin >> car >> positionDiff;
 
             int newPos = i + positionDiff;
-            if (newPos < 0 || newPos >= numberOfCars) {
+            if (newPos < 0 || newPos >= numberOfCars)
+            {
                 validGrid = false;
                 continue;
             }
@@ -39,7 +40,8 @@ int main(int argc, char **argv)
         {
             for (int i = 0; i < numberOfCars; i++)
             {
-                if (i > 0) {
+                if (i > 0)
+                {
                     std::cout << " ";
                 }
                 std::cout << cars[i];
