@@ -1,51 +1,65 @@
 #include <iostream>
 
+static int n;
+static std::string cards[100];
+static int currentIndex = 0;
+
+static void reset()
+{
+    for (int i = 0; i < n; i++)
+    {
+        cards[i] = "";
+    }
+    currentIndex = 0;
+}
+
+static void advanceCurrentIndexToNextEmptyPosition()
+{
+    do
+    {
+        currentIndex = (currentIndex + 1) % n;
+    } while (cards[currentIndex] != "");
+}
+
+static void printResult()
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (i > 0)
+        {
+            std::cout << " ";
+        }
+        std::cout << cards[i];
+    }
+    std::cout << std::endl;
+}
+
 int main(int argc, char **argv)
 {
-    int n;
     std::cin >> n;
     std::string card, name;
 
-    std::string cards[100];
-
     while (n)
     {
-
-        for (int i = 0; i < n; i++)
-        {
-            cards[i] = "";
-        }
-
-        int currentIndex = 0;
+        reset();
         for (int i = 0; i < n; i++)
         {
             std::cin >> card >> name;
 
             for (int increment = 0; increment < name.size() - 1; increment++)
             {
-                while (cards[currentIndex] != "")
-                {
-                    currentIndex = (currentIndex + 1) % n;
-                }
-                currentIndex = (currentIndex + 1) % n;
-            }
-            while (cards[currentIndex] != "")
-            {
-                currentIndex = (currentIndex + 1) % n;
+                // The currentIndex always starts pointing at an empty slot; advance length-1 times.
+                advanceCurrentIndexToNextEmptyPosition();
             }
             cards[currentIndex] = card;
-            currentIndex = (currentIndex + 1) % n;
-        }
-
-        for (int i = 0; i < n; i++)
-        {
-            if (i > 0)
+            // If there is any available slot (not the last card), move the cursor to the next empty one.
+            if (i < n - 1)
             {
-                std::cout << " ";
+                advanceCurrentIndexToNextEmptyPosition();
             }
-            std::cout << cards[i];
         }
-        std::cout << std::endl;
+        printResult();
+
         std::cin >> n;
     }
 
